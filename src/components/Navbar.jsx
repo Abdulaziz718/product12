@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const Navbar = () => {
   return (
@@ -7,7 +8,7 @@ const Navbar = () => {
             <Link to={'/'} className='text-3xl font-medium'>
                 <span className='text-blue-500'>Ecom</span><span>merse</span>
             </Link>
-            <ul className='flex itams-center gap-6'>
+            <ul className='sm:flex hidden itams-center gap-6'>
                 <li>
                     <Link className='hover:text-blue-500 transition-all'>Home</Link>
                 </li>
@@ -21,6 +22,9 @@ const Navbar = () => {
                     <Link className='hover:text-blue-500 transition-all'>Contact</Link>
                 </li>
             </ul>
+            <div className='flex sm:hidden text-3xl'>
+            <RxHamburgerMenu />
+            </div>
     </nav>
   )
 }

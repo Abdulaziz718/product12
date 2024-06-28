@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext, useReducer } from 'react'
 import { ToastContainer } from 'react-toastify'
 
 import { Route, Routes } from 'react-router-dom'
@@ -8,7 +8,26 @@ import Wishlist from './pages/Wishlist'
 import Navbar from './components/Navbar'
 import FixedNavbar from './components/FixedNavbar'
 
+export const ProductContext = createContext()
+
 const App = () => {
+  // const [data, setData] = useState([])
+  // const [defData, setDefData] = useState([])
+  // const [isFetched, setisFetched] = useState(false)
+  // useEffect(() => {
+  //     const fetchData = async () => {
+  //         try {
+  //             const res = await fetch(`${baseUrl}/products`)
+  //             const answ = await res.json()
+  //             setData(answ?.products)
+  //             setProduct(answ?.products)
+  //         } catch (error) {
+  //             console.log(error);
+  //         }
+  //     }
+  //     fetchData()
+  // }, [])
+  // const [state, dispatch] = useReducer(reducerFn, setData)
   return (
     <div>
       <ToastContainer 
@@ -26,7 +45,9 @@ const App = () => {
       />
 
       <Navbar />
-      <FixedNavbar />
+      {/* <ProductContext.Provider value={[state, dispatch]}>
+        <FixedNavbar />
+      </ProductContext.Provider> */}
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/carts' element={<Cart/>}/>
