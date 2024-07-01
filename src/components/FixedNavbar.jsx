@@ -7,7 +7,7 @@ import { IoHomeOutline } from "react-icons/io5";
 
 const FixedNavbar = ({setProduct, product}) => {
   return (
-    <div className='bg-blue-500 text-white'>
+    <div className='bg-blue-500 text-white sticky -top-1 left-0 z-50'>
         <div className='main-container h-[60px] flex justify-between items-center'>
             <FilterSelect setProduct={setProduct} product={product}/>
             <SearchingInp setProduct={setProduct} product={product}/>

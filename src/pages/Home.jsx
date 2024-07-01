@@ -1,37 +1,27 @@
-import React, { createContext, useEffect, useReducer, useState } from 'react'
+import React, { createContext, useContext, useEffect, useReducer, useState } from 'react'
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { IoIosHeart } from "react-icons/io";
 import { IoStar } from "react-icons/io5";
-import SearchingInp from '../components/SearchingInp';
-import FixedNavbar from '../components/FixedNavbar';
+import { getProduct } from '../api/api';
+import { storeContext } from '../App';
 
 
-export const ProductContext = createContext()
+
 
 const url = 'https://dummyjson.com/products'
 
 const Home = () => {
-  const [product, setProduct] = useState([])  
+  const [{products}, dispatch] = useContext(storeContext)
   useEffect(() => {
-    const getProduct = async () =>{
-      try {
-        const res = await fetch(url)
-        const {products} = await res.json()
-        setProduct(products)
-        console.log(products)
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getProduct()
+    getProduct({dispatch, type: "def"})
   }, [])
 
   return (
     <>
-      <FixedNavbar setProduct={setProduct} product={product}/>
+      
       <div className='mt-10 mx-10 md:mx-0 main-container gap-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4'>
         {
-          product?.length ? product?.map((item, i) => (
+          products?.length ? products?.map((item, i) => (
             <div key={i} className='shadow flex flex-col rounded-md hover:shadow-md transition-all'>
               <div className='aspect-[5/3] relative group'>
                 <img src={item.thumbnail} className='w-full h-full object-cover object-center' alt="" />

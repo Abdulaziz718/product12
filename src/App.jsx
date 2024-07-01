@@ -1,33 +1,26 @@
 import React, { createContext, useReducer } from 'react'
 import { ToastContainer } from 'react-toastify'
-
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Cart from './pages/Cart'
 import Wishlist from './pages/Wishlist'
 import Navbar from './components/Navbar'
 import FixedNavbar from './components/FixedNavbar'
+import { reducerFn } from './api/reducerFn'
 
-export const ProductContext = createContext()
+export const storeContext = createContext()
+
+
+const initialValue = {
+  products: [],
+  cart: [],
+  Wishlist: []
+}
 
 const App = () => {
-  // const [data, setData] = useState([])
-  // const [defData, setDefData] = useState([])
-  // const [isFetched, setisFetched] = useState(false)
-  // useEffect(() => {
-  //     const fetchData = async () => {
-  //         try {
-  //             const res = await fetch(`${baseUrl}/products`)
-  //             const answ = await res.json()
-  //             setData(answ?.products)
-  //             setProduct(answ?.products)
-  //         } catch (error) {
-  //             console.log(error);
-  //         }
-  //     }
-  //     fetchData()
-  // }, [])
-  // const [state, dispatch] = useReducer(reducerFn, setData)
+  
+  const [state, dispatch] = useReducer(reducerFn, initialValue)
+  
   return (
     <div>
       <ToastContainer 
@@ -44,15 +37,16 @@ const App = () => {
       style={{zIndex: 10000}}
       />
 
+      <storeContext.Provider value={[state, dispatch]}>
+
       <Navbar />
-      {/* <ProductContext.Provider value={[state, dispatch]}>
-        <FixedNavbar />
-      </ProductContext.Provider> */}
+      <FixedNavbar /> 
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/carts' element={<Cart/>}/>
         <Route path='/wishlist' element={<Wishlist />}/>
       </Routes>
+      </storeContext.Provider>
     </div>
   )
 }
